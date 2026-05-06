@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Copy-Item *)",
+      "Bash(node src/build.js farhad-barbershop-mondsee)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Copy-Item *)",
+      "Bash(dir /s /b \"D:\\\\Claude_Projekte\\\\Barber base\\\\files\\\\brila-dach\\\\farhad-demo\")",
+      "Bash(git -C \"D:\\\\Claude_Projekte\\\\Barber-Websites\\\\Barber base\" status)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

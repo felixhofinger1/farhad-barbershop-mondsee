@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{shop.name}} — {{shop.tagline}}</title>
+<meta name="description" content="{{shop.name}} · {{shop.tagline}} · {{address.street}}, {{address.zip}} {{address.city}}. Termin telefonisch unter {{contact.phone}}.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{shop.name}} — {{shop.tagline}}">
+<meta property="og:description" content="{{shop.name}} in {{address.city}}. {{rating.google}}★ aus {{rating.count}} Bewertungen.">
+<meta property="og:type" content="website">
+
+<!-- Local Business Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  "name": "{{shop.name}}",
+  "image": "",
+  "telephone": "{{contact.phone}}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{address.street}}",
+    "postalCode": "{{address.zip}}",
+    "addressLocality": "{{address.city}}",
+    "addressCountry": "{{address.country}}"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{rating.google}}",
+    "reviewCount": "{{rating.count}}"
+  },
+  "openingHoursSpecification": [
+    {{schemaHours}}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0f0d0a;
+  --bg-2: #1a1612;
+  --bg-3: #221c15;
+  --paper: #f1ebdf;
+  --paper-2: #d4c9b0;
+  --accent: #c9a961;
+  --accent-2: #8b6f3d;
+  --rule: #2a241d;
+  --muted: #8a7f6f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--paper);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* === NAV === */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(15, 13, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  background: var(--accent);
+  color: var(--bg) !important;
+  padding: 10px 22px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--paper); }
+.nav-toggle { display: none; background: none; border: none; color: var(--paper); font-size: 24px; cursor: pointer; }
+
+/* === HERO === */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(15,13,10,0.6) 0%, rgba(15,13,10,0.85) 100%),
+    url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1600&q=80') center/cover;
+}
+.hero-content {
+  padding: 140px 60px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.est {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  font-size: 13px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.est::before, .est::after {
+  content: ""; height: 1px; background: var(--accent-2); flex: 0 0 30px;
+}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.98;
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+}
+h1 .accent { color: var(--accent); font-style: italic; }
+.hero-sub {
+  font-size: 18px;
+  color: var(--paper-2);
+  margin-bottom: 40px;
+  max-width: 480px;
+}
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn {
+  padding: 16px 32px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-primary { background: var(--accent); color: var(--bg); }
+.btn-primary:hover { background: var(--paper); transform: translateY(-2px); }
+.btn-secondary { background: transparent; color: var(--paper); border: 1px solid var(--paper); }
+.btn-secondary:hover { background: var(--paper); color: var(--bg); }
+
+.rating-badge {
+  position: absolute;
+  bottom: 60px; right: 60px;
+  background: var(--paper);
+  color: var(--bg);
+  padding: 22px 28px;
+  z-index: 3;
+  border-left: 4px solid var(--accent);
+}
+.rating-badge .stars { color: var(--accent); font-size: 16px; letter-spacing: 0.2em; margin-bottom: 4px; }
+.rating-badge .num { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1; }
+.rating-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-top: 4px; }
+
+/* === SECTIONS === */
+section { padding: 100px 60px; }
+.section-kicker {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--accent);
+  letter-spacing: 0.25em;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+h2 .accent { color: var(--accent); font-style: italic; }
+
+/* === SERVICES === */
+.services { background: var(--bg-2); }
+.services-head { max-width: 700px; margin-bottom: 60px; }
+.services-head p { color: var(--paper-2); font-size: 18px; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.service { background: var(--bg-2); padding: 36px 30px; transition: background 0.3s; }
+.service:hover { background: var(--bg-3); }
+.service-num {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--accent-2);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  margin-bottom: 14px;
+}
+.service h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px;
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+.service-duration {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+.service-desc { font-size: 14px; color: var(--paper-2); margin-bottom: 22px; }
+.service-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px;
+  color: var(--accent);
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+.service-price small { font-size: 14px; color: var(--muted); }
+
+/* === REVIEWS === */
+.reviews { background: var(--bg); text-align: center; }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1200px;
+  margin: 50px auto 0;
+}
+.review {
+  background: var(--bg-2);
+  padding: 36px 30px;
+  border-top: 3px solid var(--accent);
+  text-align: left;
+}
+.review .stars {
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+.review-text {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 22px;
+  color: var(--paper);
+}
+.review-author { display: flex; align-items: center; gap: 14px; padding-top: 16px; border-top: 1px solid var(--rule); }
+.author-initial {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-family: 'DM Serif Display', serif;
+}
+.author-name { font-weight: 600; }
+.author-when { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.google-attrib {
+  margin-top: 50px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.google-attrib strong { color: var(--accent); }
+
+/* === VISIT === */
+.visit { background: var(--bg-2); padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
+.visit-info { padding: 80px 60px; }
+.visit-block { margin-bottom: 32px; }
+.visit-block h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.visit-block p { font-size: 17px; }
+.visit-block a:hover { color: var(--accent); }
+.hours-row {
+  display: flex; justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--rule);
+  max-width: 360px;
+  font-size: 15px;
+}
+.hours-row:last-child { border-bottom: none; }
+.hours-row .day { color: var(--paper-2); text-transform: capitalize; }
+.hours-row .time { color: var(--accent); font-variant-numeric: tabular-nums; }
+.hours-row.closed .time { color: var(--muted); font-style: italic; }
+.visit-map {
+  background:
+    linear-gradient(135deg, rgba(15,13,10,0.4), rgba(15,13,10,0.6)),
+    url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1200&q=80') center/cover;
+  min-height: 500px;
+  display: flex; align-items: center; justify-content: center;
+}
+.map-pin {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 18px 28px;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.15em;
+  font-size: 16px;
+}
+
+/* === FOOTER === */
+footer {
+  background: var(--bg);
+  padding: 50px 60px 30px;
+  border-top: 1px solid var(--rule);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--rule);
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  margin-bottom: 12px;
+}
+.footer-grid h5 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.footer-grid p, .footer-grid a {
+  font-size: 14px;
+  color: var(--paper-2);
+  display: block;
+  margin-bottom: 6px;
+}
+.footer-grid a:hover { color: var(--accent); }
+.footer-bottom {
+  display: flex; justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg-2);
+    padding: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-content { padding: 120px 24px 80px; }
+  .rating-badge { position: relative; bottom: auto; right: auto; margin: 0 24px 40px; align-self: flex-start; }
+  section { padding: 70px 24px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .visit { grid-template-columns: 1fr; }
+  .visit-info { padding: 50px 24px; }
+  .visit-map { min-height: 300px; }
+  footer { padding: 40px 24px 24px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav">
+  <a href="#" class="nav-logo">{{shop.name}}</a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#reviews">Bewertungen</a></li>
+    <li><a href="#visit">Besuchen</a></li>
+    <li><a href="tel:{{contact.phone}}" class="nav-cta">Anrufen</a></li>
+  </ul>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="est">{{address.city}} · Est. seit Jahren</div>
+    <h1>{{hero.headlineLeading}} <span class="accent">{{hero.headlineAccent}}</span><br>{{hero.headlineTrailing}}</h1>
+    <p class="hero-sub">{{hero.subline}}</p>
+    <div class="hero-cta">
+      <a href="tel:{{contact.phone}}" class="btn btn-primary">Termin telefonisch →</a>
+      <a href="#services" class="btn btn-secondary">Services ansehen</a>
+    </div>
+  </div>
+  <div class="rating-badge">
+    <div class="stars">★★★★★</div>
+    <div class="num">{{rating.google}} / 5</div>
+    <div class="label">{{rating.count}} Google-Bewertungen</div>
+  </div>
+</header>
+
+<!-- ========== SERVICES ========== -->
+<section id="services" class="services">
+  <div class="services-head">
+    <div class="section-kicker">— Unsere Leistungen</div>
+    <h2>Was wir <span class="accent">am besten</span> können.</h2>
+    <p>Vom klassischen Herrenhaarschnitt bis zur traditionellen Nassrasur — alles, was ein Mann braucht, an einem Ort.</p>
+  </div>
+  <div class="services-grid">
+    {{servicesHtml}}
+  </div>
+</section>
+
+<!-- ========== REVIEWS ========== -->
+<section id="reviews" class="reviews">
+  <div class="section-kicker">— Was Kunden sagen</div>
+  <h2><span class="accent">{{rating.count}}</span> Bewertungen sprechen für sich.</h2>
+  <div class="reviews-grid">
+    {{reviewsHtml}}
+  </div>
+  <p class="google-attrib">Echte Bewertungen von <strong>Google Maps</strong> · {{rating.google}}★ Durchschnitt</p>
+</section>
+
+<!-- ========== VISIT ========== -->
+<section id="visit" class="visit">
+  <div class="visit-info">
+    <div class="section-kicker">— Besuche uns</div>
+    <h2>Komm <span class="accent">vorbei.</span></h2>
+
+    <div class="visit-block">
+      <h4>Adresse</h4>
+      <p><a href="{{address.googleMapsUrl}}" target="_blank">{{address.street}}<br>{{address.zip}} {{address.city}}, {{address.country}}</a></p>
+    </div>
+
+    <div class="visit-block">
+      <h4>Kontakt</h4>
+      <p><a href="tel:{{contact.phone}}">{{contact.phone}}</a></p>
+      {{contactExtras}}
+    </div>
+
+    <div class="visit-block">
+      <h4>Öffnungszeiten</h4>
+      {{hoursHtml}}
+    </div>
+  </div>
+  <div class="visit-map">
+    <a href="{{address.googleMapsUrl}}" target="_blank" class="map-pin">📍 In Google Maps öffnen</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">{{shop.name}}</div>
+      <p>{{shop.tagline}}</p>
+      <p style="margin-top: 12px; font-size: 13px;">{{address.street}}, {{address.zip}} {{address.city}}</p>
+    </div>
+    <div>
+      <h5>Navigation</h5>
+      <a href="#services">Services</a>
+      <a href="#reviews">Bewertungen</a>
+      <a href="#visit">Besuchen</a>
+    </div>
+    <div>
+      <h5>Folge uns</h5>
+      {{socialsHtml}}
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© {{currentYear}} {{shop.name}}</span>
+    <span>Direkt buchen — keine Plattform-Gebühren</span>
+  </div>
+</footer>
+
+</body>
+</html>

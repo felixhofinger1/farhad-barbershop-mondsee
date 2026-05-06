@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cold-Call-Script — Barbershop-Akquise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --paper: #fff;
+    --ink: #1a1a1a;
+    --muted: #666;
+    --accent: #c9302c;
+    --accent-2: #2c5f8d;
+    --green: #2d8659;
+    --rule: #e0dcd1;
+    --highlight: #fff4d6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+    padding: 40px 20px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 30px 40px;
+    margin-bottom: 0;
+    border-radius: 4px 4px 0 0;
+  }
+  header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  header .sub {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  /* PRE-CALL CHECKLIST */
+  .pre-call {
+    background: var(--highlight);
+    border: 1px solid #e8d68a;
+    border-top: none;
+    padding: 20px 40px;
+    margin-bottom: 30px;
+  }
+  .pre-call h2 {
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .pre-call ul { list-style: none; }
+  .pre-call li {
+    padding: 4px 0;
+    font-size: 14px;
+  }
+  .pre-call li::before {
+    content: "☐ ";
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  /* PHASE BLOCKS */
+  .phase {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    margin-bottom: 24px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .phase-head {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phase-head h2 {
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  .phase-head .time {
+    font-size: 11px;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+  }
+  .phase-body { padding: 24px 30px; }
+
+  .goal {
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .goal strong { color: var(--green); }
+
+  /* DIALOG */
+  .you, .him {
+    margin: 14px 0;
+    padding: 14px 18px;
+    border-radius: 6px;
+    position: relative;
+  }
+  .you {
+    background: #f0f7fa;
+    border-left: 3px solid var(--accent-2);
+    margin-right: 40px;
+  }
+  .him {
+    background: #f4f4f4;
+    border-left: 3px solid var(--muted);
+    margin-left: 40px;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .you .role { color: var(--accent-2); }
+  .him .role { color: var(--muted); }
+  .you p, .him p { font-size: 15px; line-height: 1.55; }
+  .you p + p, .him p + p { margin-top: 8px; }
+
+  .note {
+    background: var(--highlight);
+    padding: 10px 14px;
+    border-left: 3px solid #d4a017;
+    font-size: 13px;
+    margin: 12px 0;
+    color: #5c4a0a;
+  }
+  .note strong { color: var(--ink); }
+
+  .branch {
+    border: 1px dashed var(--rule);
+    padding: 12px 16px;
+    margin: 12px 0;
+    background: #fafafa;
+    font-size: 13px;
+  }
+  .branch strong { display: block; margin-bottom: 6px; color: var(--accent-2); }
+
+  /* OBJECTIONS */
+  .obj-section {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    margin-top: 50px;
+    margin-bottom: 30px;
+    border-radius: 4px;
+  }
+  .obj-section > h2 {
+    background: var(--accent);
+    color: var(--paper);
+    padding: 16px 30px;
+    font-size: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  .obj-section > .intro {
+    padding: 20px 30px;
+    background: #fff8f7;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .objection {
+    padding: 22px 30px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .objection:last-child { border-bottom: none; }
+  .obj-quote {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .obj-statement {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .obj-response {
+    background: #f0f7fa;
+    border-left: 3px solid var(--accent-2);
+    padding: 12px 16px;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+  .obj-response::before {
+    content: "ANTWORT ";
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-2);
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* CLOSE */
+  .close-block {
+    background: var(--green);
+    color: var(--paper);
+    padding: 24px 30px;
+    margin-top: 30px;
+    border-radius: 4px;
+  }
+  .close-block h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .close-block p { font-size: 16px; line-height: 1.5; }
+
+  /* PRINT */
+  @media print {
+    body { background: white; padding: 0; font-size: 12px; }
+    .phase, .obj-section { page-break-inside: avoid; }
+    header { background: white; color: black; border-bottom: 3px solid black; }
+    header .label { color: black; }
+    .pre-call { background: #f5f5f5; }
+  }
+
+  @media (max-width: 700px) {
+    body { padding: 16px 8px; }
+    header, .pre-call, .phase-body, .objection { padding: 16px 18px; }
+    .you, .him { margin-left: 0; margin-right: 0; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header>
+  <div class="label">Sales-Script · Cold-Call · Barbershops</div>
+  <h1>Telefon-Akquise — Demo-Verkauf</h1>
+  <div class="sub">Ziel: 7-Minuten-Call → "Schick mir den Link" → Follow-Up in 48h</div>
+</header>
+
+<!-- PRE-CALL CHECKLIST -->
+<div class="pre-call">
+  <h2>⚡ Vor dem Anruf — 60 Sekunden</h2>
+  <ul>
+    <li>Demo ist live und funktioniert (Handy-Browser testen)</li>
+    <li>Demo-URL kopiert, bereit zum WhatsApp-Versand</li>
+    <li>Google-Maps-Eintrag des Shops geöffnet (für Bewertungen-Zahl)</li>
+    <li>Konkurrenz-Check: hat der Shop eine eigene Website? Falls ja → andere Strategie</li>
+    <li>Tief atmen. Du bietest etwas Gutes an, kein Pyramidenscheme.</li>
+    <li>Zwischen 10:00–11:30 oder 14:30–16:30 anrufen (nicht mittags, nicht abends)</li>
+  </ul>
+</div>
+
+<!-- PHASE 1: OPENING -->
+<div class="phase">
+  <div class="phase-head">
+    <h2>Phase 1 · Eröffnung</h2>
+    <div class="time">~30 Sekunden</div>
+  </div>
+  <div class="phase-body">
+    <div class="goal">Ziel: <strong>Nicht aufgelegt werden.</strong> Direkt sein, nicht schleimen.</div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Hallo, hier ist Felix aus Lenzing. Spreche ich mit Farhad?"</p>
+    </div>
+
+    <div class="him">
+      <div class="role">Er</div>
+      <p>"Ja, am Apparat / Ja, das bin ich."</p>
+    </div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Servus Farhad. Kurz vorweg — ich bin kein Verkäufer und das ist kein Werbeanruf. Hast du 2 Minuten? Wenn ja, erklär ich's. Wenn nicht, leg ich auf und ruf nicht wieder an."</p>
+    </div>
+
+    <div class="note">
+      <strong>Warum das funktioniert:</strong> Du nimmst ihm die Verteidigungshaltung. "Kein Verkäufer" + Zeit-Kontrolle abgeben = sofortiger Pattern-Break. Die meisten sagen "Ja, kurz".
+    </div>
+
+    <div class="branch">
+      <strong>Wenn er sagt "Nein, keine Zeit":</strong>
+      <p>"Verstanden. Wann passt's besser — heute Nachmittag oder morgen Vormittag?"</p>
+      <p>→ Termin fixieren, dann im Kalender notieren, pünktlich anrufen.</p>
+    </div>
+
+    <div class="branch">
+      <strong>Wenn er ungeduldig wirkt:</strong>
+      <p>"Ok, ganz kurz: Ich hab dir eine Website gebaut, gratis, kannst du dir anschauen. Darf ich dir den Link per WhatsApp schicken?" → Hop direkt zu Phase 4.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2: HOOK -->
+<div class="phase">
+  <div class="phase-head">
+    <h2>Phase 2 · Der Hook</h2>
+    <div class="time">~60 Sekunden</div>
+  </div>
+  <div class="phase-body">
+    <div class="goal">Ziel: <strong>Neugier wecken.</strong> Konkret werden, nicht abstrakt verkaufen.</div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Ich hab gesehen, dass dein Shop in Mondsee 4,7 Sterne mit 111 Bewertungen hat. Das ist top. Aber wenn man auf Google nach 'Barbershop Mondsee' sucht, kommt nicht dein Shop zuerst, sondern SaintBarber. Weißt du warum?"</p>
+    </div>
+
+    <div class="him">
+      <div class="role">Er</div>
+      <p>(Kurze Pause. Vielleicht "Keine Ahnung" oder "Ja schon gehört.")</p>
+    </div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Weil die eine eigene Website haben und du nicht. Google bevorzugt Shops mit eigener Website. Deine Bewertungen sind besser als deren — aber du wirst online quasi unsichtbar dafür."</p>
+
+      <p>"Ich hab dir deshalb mal eine Website gebaut, mit deinen echten Bewertungen drauf. Hat mich nichts gekostet. Wollte fragen, ob ich dir den Link schicken darf — du schaust kurz, sagst mir was du davon hältst, und wenn's nicht passt vergessen wir's."</p>
+    </div>
+
+    <div class="note">
+      <strong>Wichtig:</strong> Kein Druck. Kein "exklusives Angebot heute". Du gibst ihm etwas, das es schon gibt. Das ist die <strong>Brila-Magie</strong> — die Demo existiert, bevor er Ja sagt.
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3: DEMO HANDOFF -->
+<div class="phase">
+  <div class="phase-head">
+    <h2>Phase 3 · Link senden</h2>
+    <div class="time">~60 Sekunden</div>
+  </div>
+  <div class="phase-body">
+    <div class="goal">Ziel: <strong>Er hat den Link offen.</strong> Im Idealfall noch im Call.</div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Wie schick ich's dir am besten — WhatsApp oder SMS?"</p>
+    </div>
+
+    <div class="him">
+      <div class="role">Er</div>
+      <p>"WhatsApp passt."</p>
+    </div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Perfekt, schicke ich dir jetzt. Schau dir's in Ruhe an. Ich ruf dich übermorgen am Vormittag nochmal kurz an, dann sagst du mir was du denkst — geht das?"</p>
+    </div>
+
+    <div class="note">
+      <strong>Trick:</strong> Du wartest NICHT, dass er die Demo jetzt im Call ansieht. Er sitzt vielleicht beim Kunden. Du fixierst stattdessen den Follow-Up-Termin SOFORT. Wer sich darauf einlässt, ist ein echter Lead.
+    </div>
+
+    <div class="branch">
+      <strong>Wenn er im Call die Demo öffnet:</strong>
+      <p>Schweigen. Lass ihn 30 Sekunden scrollen. Erst dann: "Was ist dein erster Eindruck?"</p>
+      <p>→ Höre zu. Notiere alles. Der erste Satz ist Gold wert.</p>
+    </div>
+
+    <div class="branch">
+      <strong>Wenn er nicht WhatsApp benutzt:</strong>
+      <p>"Hast du eine E-Mail-Adresse, die du regelmäßig checkst?" → Falls nein: "Kein Problem, ich schreib's auf einen Zettel und werf's bei dir im Geschäft ein. Steh ich vor 18 Uhr in der Tür."</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4: SOFT-CLOSE -->
+<div class="phase">
+  <div class="phase-head">
+    <h2>Phase 4 · Soft-Close</h2>
+    <div class="time">~30 Sekunden</div>
+  </div>
+  <div class="phase-body">
+    <div class="goal">Ziel: <strong>Pricing wird einmal kurz erwähnt.</strong> Damit er übermorgen nicht überrascht ist.</div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Eine Sache vorab, damit du weißt was auf dich zukommt: Wenn dir die Website gefällt, kostet das Übernehmen 299 Euro einmalig plus 19 Euro im Monat für Hosting und kleine Änderungen. Wenn nicht, lösch ich's einfach. Kein Vertrag, keine Verpflichtung."</p>
+    </div>
+
+    <div class="him">
+      <div class="role">Er</div>
+      <p>(Vermutlich ruhig. Vielleicht "Ok, schau ich mir an" oder "Mhm.")</p>
+    </div>
+
+    <div class="you">
+      <div class="role">Du</div>
+      <p>"Super. Ich melde mich Donnerstag um zehn. Ciao Farhad, schönen Tag noch."</p>
+    </div>
+
+    <div class="note">
+      <strong>Aufhängen, bevor er reden kann.</strong> Klingt hart, ist aber Standard. Du hast geliefert, was angekündigt war (kurz, klar, freundlich). Mehr Worte = mehr Risiko.
+    </div>
+  </div>
+</div>
+
+<!-- IMMEDIATE FOLLOW-UP -->
+<div class="close-block">
+  <h3>⏰ Sofort nach dem Auflegen</h3>
+  <p>1. WhatsApp öffnen, Demo-Link an Farhad senden mit kurzem Text:<br>
+  <em>"Hi Farhad, hier wie besprochen die Demo. Schau in Ruhe drauf. Bis Donnerstag — Felix"</em></p>
+  <p>2. Im Kalender: Termin "Follow-Up Farhad — Donnerstag 10:00" eintragen</p>
+  <p>3. Notiz machen: Was hat er gesagt? Tonfall? Erstreaktion? — alles, was beim nächsten Call hilft.</p>
+</div>
+
+<!-- =================== -->
+<!-- OBJECTIONS CHEAT SHEET -->
+<!-- =================== -->
+<div class="obj-section">
+  <h2>🛡 Einwand-Cheat-Sheet</h2>
+  <div class="intro">
+    Wenn er nicht direkt zustimmt: ruhig bleiben, nicht überreden. Diese Antworten sind für den Fall, dass er zögert oder gleich "Nein" sagt. <strong>Nie pushen — immer reframen.</strong>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 01</div>
+    <div class="obj-statement">"Ich hab Facebook und Instagram, das reicht."</div>
+    <div class="obj-response">"Verstehe. Aber wenn dein nächster Kunde dich bei Google sucht — wie er's wahrscheinlich tut — landet er bei deinem Konkurrenten. Instagram ist gut für Stammkunden, eine eigene Website ist für Neukunden. Schau einfach kurz die Demo an, dann siehst du den Unterschied."</div>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 02</div>
+    <div class="obj-statement">"Zu teuer."</div>
+    <div class="obj-response">"Verstehe. Lass mich kurz erklären: Plattformen wie Treatwell oder Planity nehmen 35 Prozent Provision auf jeden Neukunden. Bei einem Schnitt für 30 Euro sind das 10 Euro pro Kunde. Drei Neukunden im Monat über deine eigene Website — und das Hosting hat sich gerechnet."</div>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 03</div>
+    <div class="obj-statement">"Hab keine Zeit für sowas."</div>
+    <div class="obj-response">"Genau deshalb der Anruf. Du musst nichts machen — die Website steht. Ich brauche maximal 10 Minuten von dir, um zwei Fotos vom Shop zu bekommen und deine echten Preise einzutragen. Mehr nicht."</div>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 04</div>
+    <div class="obj-statement">"Mein Cousin/Freund/Neffe macht Websites."</div>
+    <div class="obj-response">"Top, dann nutz das. Ich frag nur eines: Steht die Website schon? Falls nicht und es zieht sich — meine Demo gibt's heute schon zu sehen. Schau sie einfach an, kostet dich nichts, und du hast einen Vergleich für deinen Cousin."</div>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 05</div>
+    <div class="obj-statement">"Schick mir was per Mail, ich schau's mir an." (Brushoff)</div>
+    <div class="obj-response">"Mach ich gern. Aber wir wissen beide, dass solche Mails meistens untergehen. Was wäre, wenn ich dir den Demo-Link jetzt per WhatsApp schicke und übermorgen um zehn kurz anrufe? Wenn dir die Demo nicht gefällt, sagst du mir's in 30 Sekunden."</div>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 06</div>
+    <div class="obj-statement">"Wer bist du nochmal? Wo hast du meine Nummer her?"</div>
+    <div class="obj-response">"Faire Frage. Felix Müller, ich wohne in Lenzing. Deine Nummer ist auf deinem Google-Maps-Eintrag öffentlich — daher hab ich sie. Ich bau Websites für Barbershops in der Region und du warst auf meiner Liste, weil deine Bewertungen so stark sind."</div>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 07</div>
+    <div class="obj-statement">"Schick mir's einfach, ich überleg's mir und melde mich."</div>
+    <div class="obj-response">"Klar. Ich schick's gleich. Eine Bitte aber: Lass uns trotzdem einen kurzen Termin Donnerstag um zehn fixieren, fünf Minuten am Telefon. Falls du dich nicht meldest, hast du den Termin als Erinnerung. Falls du dich entscheidest, dass es nichts für dich ist, sagst du's mir kurz und wir hängen wieder auf. Geht das?"</div>
+  </div>
+
+  <div class="objection">
+    <div class="obj-quote">Einwand 08 — Hartes Nein</div>
+    <div class="obj-statement">"Nein, kein Interesse." (definitiv)</div>
+    <div class="obj-response">"Alles gut. Eine letzte Frage und ich lass dich in Ruhe: Ist es das Thema Website generell, oder mein Angebot konkret? Falls's das Angebot ist, würde mir Feedback helfen — egal wie ehrlich. Falls's grundsätzlich ist, wünsche ich dir weiterhin viel Erfolg, ciao."</div>
+  </div>
+</div>
+
+<!-- AFTER-CALL DEBRIEF -->
+<div class="phase" style="margin-top: 40px;">
+  <div class="phase-head">
+    <h2>Nach dem Call · 2-Minuten-Debrief</h2>
+    <div class="time">Pflicht</div>
+  </div>
+  <div class="phase-body">
+    <div class="goal">Ziel: <strong>Lernen, beim nächsten Call besser sein.</strong></div>
+
+    <p style="margin-bottom: 14px;">Direkt nach dem Auflegen kurz notieren:</p>
+
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="padding: 6px 0; border-bottom: 1px dashed var(--rule);">📝 <strong>Tonfall:</strong> Offen / neutral / abweisend?</li>
+      <li style="padding: 6px 0; border-bottom: 1px dashed var(--rule);">📝 <strong>Stelle, an der er angebissen hat:</strong> Bewertungen? SaintBarber-Erwähnung? Pricing?</li>
+      <li style="padding: 6px 0; border-bottom: 1px dashed var(--rule);">📝 <strong>Stelle, wo's stockte:</strong> Welche Frage hat ihn überrascht?</li>
+      <li style="padding: 6px 0; border-bottom: 1px dashed var(--rule);">📝 <strong>Folgetermin?</strong> Ja → Datum / Nein → Grund?</li>
+      <li style="padding: 6px 0;">📝 <strong>Was würde ich beim nächsten Call anders machen?</strong></li>
+    </ul>
+
+    <div class="note" style="margin-top: 20px;">
+      <strong>Faustregel:</strong> Die ersten 5 Calls sind Lerngeld. Erwarte keinen Sale, sondern Daten. Ab Call 6 wird's gut.
+    </div>
+  </div>
+</div>
+
+<p style="text-align: center; margin-top: 50px; font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">
+  END OF SCRIPT · BUILT FOR FELIX · MAY 2026
+</p>
+
+</div>
+</body>
+</html>

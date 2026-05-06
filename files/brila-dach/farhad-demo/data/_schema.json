@@ -1,0 +1,65 @@
+{
+  "_comment": "Schema-Referenz. Pro Shop wird eine Kopie in data/<slug>.json gemacht.",
+  "shop": {
+    "name": "string",
+    "slug": "kebab-case-string",
+    "tagline": "string (max 60 chars)",
+    "founded": "YYYY oder null"
+  },
+  "address": {
+    "street": "string",
+    "zip": "string",
+    "city": "string",
+    "country": "AT|DE|CH",
+    "googleMapsUrl": "string"
+  },
+  "contact": {
+    "phone": "string (international format +43...)",
+    "email": "string oder null",
+    "instagram": "@handle oder null",
+    "facebook": "string oder null",
+    "bookingUrl": "string oder null"
+  },
+  "hours": {
+    "monday": "HH:MM-HH:MM oder 'geschlossen'",
+    "tuesday": "...",
+    "wednesday": "...",
+    "thursday": "...",
+    "friday": "...",
+    "saturday": "...",
+    "sunday": "..."
+  },
+  "rating": {
+    "google": "number (4.7)",
+    "count": "number (111)",
+    "source": "Google Maps"
+  },
+  "reviews": [
+    {
+      "author": "Vorname oder Initial",
+      "stars": 5,
+      "text": "Echter Review-Text",
+      "when": "string z.B. 'vor 2 Monaten'"
+    }
+  ],
+  "services": [
+    {
+      "name": "Herrenhaarschnitt",
+      "duration": "30 min",
+      "price": "25",
+      "currency": "EUR",
+      "description": "string"
+    }
+  ],
+  "differentiators": [
+    "Wi-Fi",
+    "Kostenlose Getränke",
+    "Walk-Ins willkommen"
+  ],
+  "hero": {
+    "headlineLeading": "Klassische",
+    "headlineAccent": "Schnitte.",
+    "headlineTrailing": "Moderne Männer.",
+    "subline": "string"
+  }
+}

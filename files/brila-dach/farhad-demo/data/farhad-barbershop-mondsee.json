@@ -1,0 +1,114 @@
+{
+  "shop": {
+    "name": "Farhad Barbershop",
+    "slug": "farhad-barbershop-mondsee",
+    "tagline": "Herrenfriseur & Bartpflege in Mondsee",
+    "founded": null
+  },
+  "address": {
+    "street": "Herzog Odilo-Straße 29",
+    "zip": "5310",
+    "city": "Mondsee",
+    "country": "AT",
+    "googleMapsUrl": "https://www.google.com/maps/place/Farhad+Barbershop"
+  },
+  "contact": {
+    "phone": "+43 664 5363642",
+    "email": "farhad1990111@gmail.com",
+    "instagram": "@barber.shop_farhad",
+    "facebook": "https://www.facebook.com/p/Farhad-BarberShop-100083371807503/",
+    "bookingUrl": null
+  },
+  "hours": {
+    "monday": "09:30-19:00",
+    "tuesday": "09:30-19:00",
+    "wednesday": "09:30-19:00",
+    "thursday": "09:30-19:00",
+    "friday": "09:30-19:00",
+    "saturday": "09:30-19:00",
+    "sunday": "geschlossen"
+  },
+  "rating": {
+    "google": 4.7,
+    "count": 111,
+    "source": "Google Maps"
+  },
+  "_reviews_note": "PLATZHALTER — vor Pitch durch echte Google-Reviews ersetzen. Felix: Google Maps öffnen, 3-5 längste positive Reviews kopieren.",
+  "reviews": [
+    {
+      "author": "Michael K.",
+      "stars": 5,
+      "text": "[ECHTEN REVIEW EINFÜGEN]",
+      "when": "vor 2 Wochen"
+    },
+    {
+      "author": "Stefan H.",
+      "stars": 5,
+      "text": "[ECHTEN REVIEW EINFÜGEN]",
+      "when": "vor 1 Monat"
+    },
+    {
+      "author": "Andreas W.",
+      "stars": 5,
+      "text": "[ECHTEN REVIEW EINFÜGEN]",
+      "when": "vor 3 Monaten"
+    }
+  ],
+  "_services_note": "PLATZHALTER-PREISE. Felix: Per Telefon oder Instagram echte Preise einholen ODER mit Demo-Preisen launchen und im Pitch sagen 'eure echten Preise einsetzen wir vor dem Live-Gang'.",
+  "services": [
+    {
+      "name": "Herrenhaarschnitt",
+      "duration": "30 min",
+      "price": "25",
+      "currency": "EUR",
+      "description": "Klassischer oder moderner Schnitt, individuell auf dich abgestimmt."
+    },
+    {
+      "name": "Haarschnitt & Bart",
+      "duration": "45 min",
+      "price": "35",
+      "currency": "EUR",
+      "description": "Komplett-Service inkl. Bartkonturen und Styling."
+    },
+    {
+      "name": "Klassische Rasur",
+      "duration": "30 min",
+      "price": "20",
+      "currency": "EUR",
+      "description": "Heißhandtuch, traditionelle Nassrasur mit Messer."
+    },
+    {
+      "name": "Bartpflege",
+      "duration": "20 min",
+      "price": "15",
+      "currency": "EUR",
+      "description": "Trimmen, Konturen, Styling und Pflegeöl."
+    },
+    {
+      "name": "Kinderhaarschnitt",
+      "duration": "20 min",
+      "price": "18",
+      "currency": "EUR",
+      "description": "Geduldiger Service für die Jüngsten (bis 12 Jahre)."
+    },
+    {
+      "name": "Komplett-Paket",
+      "duration": "60 min",
+      "price": "45",
+      "currency": "EUR",
+      "description": "Schnitt, Bart, Rasur, Augenbrauen — die volle Behandlung."
+    }
+  ],
+  "differentiators": [
+    "Free Wi-Fi",
+    "Walk-Ins willkommen",
+    "Kartenzahlung möglich",
+    "Onsite Service"
+  ],
+  "hero": {
+    "headlineLeading": "Dein",
+    "headlineAccent": "Style.",
+    "headlineTrailing": "Unsere Handwerkskunst.",
+    "subline": "Herrenfriseur und Barbier mit Leidenschaft für Details — direkt am Mondsee, Herzog Odilo-Straße 29."
+  }
+}
