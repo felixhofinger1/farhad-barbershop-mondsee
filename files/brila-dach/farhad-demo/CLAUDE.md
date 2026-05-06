@@ -7,7 +7,7 @@ gebaut → an den Shop verkauft → bei Kauf finalisiert.
 
 ## Aktueller Stand
 - Erste Demo: Farhad Barbershop, Mondsee (5310, AT)
-- Stack: Statisches HTML/CSS, Vercel-Deploy
+- Stack: Statisches HTML/CSS, GitHub Pages Deploy
 - Kein Build-Step, kein Framework — bewusst lean
 
 ## Verzeichnisstruktur
@@ -19,7 +19,7 @@ gebaut → an den Shop verkauft → bei Kauf finalisiert.
 ## Workflow pro Shop
 1. `data/<slug>.json` erstellen oder kopieren
 2. `node src/build.js <slug>` ausführen
-3. `vercel --prod public/<slug>` deployen
+3. `index.html` ins Root-Verzeichnis kopieren → git push → GitHub Pages deployed automatisch
 4. Demo-Link an Shop senden
 
 ## Konventionen
