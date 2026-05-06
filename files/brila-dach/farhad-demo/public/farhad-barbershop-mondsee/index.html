@@ -239,8 +239,33 @@ h2 .accent { color: var(--accent); font-style: italic; }
   background: var(--rule);
   border: 1px solid var(--rule);
 }
-.service { background: var(--bg-2); padding: 36px 30px; transition: background 0.3s; }
+.service {
+  background: var(--bg-2);
+  padding: 36px 30px;
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out, background 0.3s;
+}
 .service:hover { background: var(--bg-3); }
+.service-spotlight {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s;
+  overflow: hidden;
+}
+.service-spotlight-inner {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 40%);
+  transform: translate(-50%, -50%);
+}
 .service-num {
   font-family: 'Bebas Neue', sans-serif;
   color: var(--accent-2);
@@ -285,6 +310,8 @@ h2 .accent { color: var(--accent); font-style: italic; }
   padding: 36px 30px;
   border-top: 3px solid var(--accent);
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 .review .stars {
   color: var(--accent);
@@ -293,6 +320,7 @@ h2 .accent { color: var(--accent); font-style: italic; }
   font-size: 16px;
 }
 .review-text {
+  flex: 1;
   font-family: 'DM Serif Display', serif;
   font-style: italic;
   font-size: 18px;
@@ -529,36 +557,36 @@ footer {
     
     <div class="review">
       <div class="stars">★★★★★</div>
-      <p class="review-text">„[ECHTEN REVIEW EINFÜGEN]"</p>
+      <p class="review-text">„Top Preis-Leistungs-Verhältnis – hier bekommt man wirklich Qualität zu fairen Preisen. Jeder Mitarbeiter nimmt sich extrem viel Zeit für die Kunden, arbeitet sehr sorgfältig und mit Liebe zum Detail. Egal ob Haarschnitt oder Bart – das Ergebnis ist immer perfekt. Klare Empfehlung!"</p>
       <div class="review-author">
-        <div class="author-initial">M</div>
+        <div class="author-initial">V</div>
         <div>
-          <div class="author-name">Michael K.</div>
-          <div class="author-when">vor 2 Wochen</div>
+          <div class="author-name">Viktor Goldner</div>
+          <div class="author-when">vor einem Jahr</div>
         </div>
       </div>
     </div>
-  
+
     <div class="review">
       <div class="stars">★★★★★</div>
-      <p class="review-text">„[ECHTEN REVIEW EINFÜGEN]"</p>
+      <p class="review-text">„Sehr freundlicher Empfang, saubere und angenehme Atmosphäre. Farhad hat sich sehr viel Zeit genommen und sehr präzise gearbeitet. Ich komme auf jeden Fall wieder, klare Empfehlung!"</p>
       <div class="review-author">
         <div class="author-initial">S</div>
         <div>
-          <div class="author-name">Stefan H.</div>
-          <div class="author-when">vor 1 Monat</div>
+          <div class="author-name">Serdar M Baş</div>
+          <div class="author-when">vor 10 Monaten</div>
         </div>
       </div>
     </div>
-  
+
     <div class="review">
       <div class="stars">★★★★★</div>
-      <p class="review-text">„[ECHTEN REVIEW EINFÜGEN]"</p>
+      <p class="review-text">„Das Team ist sehr professionell und freundlich, und die Atmosphäre ist immer einladend. Die Schnitte und Stylings sind immer perfekt und ich gehe jedes Mal zufrieden nach Hause. Der Herr Farhad hört deinen Wünschen genau zu und erfüllt diese. Definitiv ein 5-Sterne-Erlebnis!"</p>
       <div class="review-author">
         <div class="author-initial">A</div>
         <div>
-          <div class="author-name">Andreas W.</div>
-          <div class="author-when">vor 3 Monaten</div>
+          <div class="author-name">Aleksandar Seslic</div>
+          <div class="author-when">vor 2 Jahren</div>
         </div>
       </div>
     </div>
@@ -575,7 +603,7 @@ footer {
 
     <div class="visit-block">
       <h4>Adresse</h4>
-      <p><a href="https://www.google.com/maps/place/Farhad+Barbershop" target="_blank">Herzog Odilo-Straße 29<br>5310 Mondsee, AT</a></p>
+      <p><a href="https://www.google.com/maps/search/?api=1&query=Farhad+Barbershop+Herzog+Odilo-Stra%C3%9Fe+29+5310+Mondsee" target="_blank">Herzog Odilo-Straße 29<br>5310 Mondsee, AT</a></p>
     </div>
 
     <div class="visit-block">
@@ -588,37 +616,37 @@ footer {
       <h4>Öffnungszeiten</h4>
       
       <div class="hours-row">
-        <span class="day">Mo</span>
+        <span class="day">Montag</span>
         <span class="time">09:30-19:00</span>
       </div>
       <div class="hours-row">
-        <span class="day">Di</span>
+        <span class="day">Dienstag</span>
         <span class="time">09:30-19:00</span>
       </div>
       <div class="hours-row">
-        <span class="day">Mi</span>
+        <span class="day">Mittwoch</span>
         <span class="time">09:30-19:00</span>
       </div>
       <div class="hours-row">
-        <span class="day">Do</span>
+        <span class="day">Donnerstag</span>
         <span class="time">09:30-19:00</span>
       </div>
       <div class="hours-row">
-        <span class="day">Fr</span>
+        <span class="day">Freitag</span>
         <span class="time">09:30-19:00</span>
       </div>
       <div class="hours-row">
-        <span class="day">Sa</span>
+        <span class="day">Samstag</span>
         <span class="time">09:30-19:00</span>
       </div>
       <div class="hours-row closed">
-        <span class="day">So</span>
+        <span class="day">Sonntag</span>
         <span class="time">geschlossen</span>
       </div>
     </div>
   </div>
   <div class="visit-map">
-    <a href="https://www.google.com/maps/place/Farhad+Barbershop" target="_blank" class="map-pin">📍 In Google Maps öffnen</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Farhad+Barbershop+Herzog+Odilo-Stra%C3%9Fe+29+5310+Mondsee" target="_blank" class="map-pin">📍 In Google Maps öffnen</a>
   </div>
 </section>
 
@@ -640,7 +668,7 @@ footer {
       <h5>Folge uns</h5>
       <a href="https://instagram.com/barber.shop_farhad" target="_blank">Instagram</a>
       <a href="https://www.facebook.com/p/Farhad-BarberShop-100083371807503/" target="_blank">Facebook</a>
-      <a href="https://www.google.com/maps/place/Farhad+Barbershop" target="_blank">Google Maps</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Farhad+Barbershop+Herzog+Odilo-Stra%C3%9Fe+29+5310+Mondsee" target="_blank">Google Maps</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -649,5 +677,44 @@ footer {
   </div>
 </footer>
 
+
+<script>
+(function () {
+  const TILT_LIMIT = 15;
+  const SCALE = 1.05;
+  const PERSPECTIVE = 1200;
+
+  document.querySelectorAll('.service').forEach(function (card) {
+    var spotlight = document.createElement('div');
+    spotlight.className = 'service-spotlight';
+    var inner = document.createElement('div');
+    inner.className = 'service-spotlight-inner';
+    spotlight.appendChild(inner);
+    card.appendChild(spotlight);
+
+    card.addEventListener('pointerenter', function () {
+      spotlight.style.opacity = '1';
+    });
+
+    card.addEventListener('pointermove', function (e) {
+      var rect = card.getBoundingClientRect();
+      var px = (e.clientX - rect.left) / rect.width;
+      var py = (e.clientY - rect.top) / rect.height;
+      var xRot = (py - 0.5) * (TILT_LIMIT * 2) * -1;
+      var yRot = (px - 0.5) * (TILT_LIMIT * 2);
+      card.style.transform =
+        'perspective(' + PERSPECTIVE + 'px) rotateX(' + xRot + 'deg) rotateY(' + yRot + 'deg) scale3d(' + SCALE + ',' + SCALE + ',' + SCALE + ')';
+      inner.style.left = (px * 100) + '%';
+      inner.style.top = (py * 100) + '%';
+    });
+
+    card.addEventListener('pointerleave', function () {
+      card.style.transform =
+        'perspective(' + PERSPECTIVE + 'px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+      spotlight.style.opacity = '0';
+    });
+  });
+})();
+</script>
 </body>
 </html>
